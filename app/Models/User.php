@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -48,13 +49,24 @@ class User extends Authenticatable
         ];
     }
 
-    public function companies(): BelongsToMany
+    public function createdCategories(): HasMany
     {
-        return $this->belongsToMany(Company::class);
+        return $this->hasMany(Category::class);
+    }
+
+    public function createdCompanies(): HasMany
+    {
+        return $this->hasMany(Company::class);
+    }
+
+    public function createdJobOffers(): HasMany
+    {
+        return $this->hasMany(JobOffer::class);
     }
 
     public function jobOffers(): BelongsToMany
     {
         return $this->belongsToMany(JobOffer::class);
     }
+
 }

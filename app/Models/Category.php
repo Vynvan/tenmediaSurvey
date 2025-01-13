@@ -18,11 +18,17 @@ class Category extends Model
      */
     protected $fillable = [
         'name',
+        'created_by',
     ];
 
     public function jobOffers(): HasMany
     {
         return $this->hasMany(JobOffer::class);
+    }
+
+    public function createdBy(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 
 }
