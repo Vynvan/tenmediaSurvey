@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('website');
+            $table->foreignId('jobOffers_id')->constrained('jobOffers');
             $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });

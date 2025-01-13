@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
-use App\Http\Requests\StoreJobRequest;
-use App\Http\Requests\UpdateJobRequest;
+use App\Models\JobOffer;
+use App\Http\Requests\StoreJobOfferRequest;
+use App\Http\Requests\UpdateJobOfferRequest;
 
-class JobController extends Controller
+class JobOfferController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJobRequest $request)
+    public function store(StoreJobOfferRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Job $job)
+    public function show(JobOffer $job)
     {
         //
     }
@@ -43,7 +43,7 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Job $job)
+    public function edit(JobOffer $job)
     {
         //
     }
@@ -51,7 +51,7 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobRequest $request, Job $job)
+    public function update(UpdateJobOfferRequest $request, JobOffer $job)
     {
         //
     }
@@ -59,7 +59,7 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Job $job)
+    public function destroy(JobOffer $job)
     {
         //
     }

@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_jobs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('job_id')->constrained('jobs');
-            $table->timestamps();
+        Schema::create('user_jobOffers', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('jobOffer_id')->constrained('jobOffers')->onDelete('cascade');
+            $table->primary(['user_id', 'jobOffer_id']);
         });
     }
 
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_jobs');
+        Schema::dropIfExists('user_jobOffers');
     }
 };

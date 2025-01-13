@@ -20,9 +20,9 @@ class Category extends Model
         'name',
     ];
 
-    public function jobs(): HasMany
+    public function jobOffers(): HasMany
     {
-        return $this->hasMany(Job::class);
+        return $this->hasMany(JobOffer::class);
     }
 
 }

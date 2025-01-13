@@ -22,8 +22,8 @@ class Company extends Model
         'created_by',
     ];
 
-    public function jobs(): HasMany
+    public function jobOffers(): HasMany
     {
-        return $this->hasMany(Job::class);
+        return $this->hasMany(JobOffer::class);
     }
 }

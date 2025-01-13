@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('jobOffers', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('salary', 8, 2);
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->timestamps();
         });
     }
