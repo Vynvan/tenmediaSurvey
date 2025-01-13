@@ -28,3 +28,7 @@ Aus der Abbildung ergeben sich die Modelle und deren Relationen, sowie folgende 
    4. Benutzer bearbeiten
 
 - Anmeldung/Registrierung
+
+Da aus der Aufgabenstellung nicht hervorgeht, ob die Benutzer Jobs anlegen oder folgen können, lasse ich das erstmal weg, 
+aber bei Szenario 1 (Benutzer können Jobs und evtl. auch Companies anlegen) würde dies eine weitere Relation "Job/Company -> Ersteller" erfordern, 
+während Szenario 2 (Benutzer können Jobs folgen/abonnieren) würde dies eine HasMany-Relation "Benutzer -> Jobs" erfordern.
