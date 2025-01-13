@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Category/Index', [
+        return Inertia::render('Categories/Index', [
             'categories' => Category::with('createdBy:id,name')->get(),
         ]);
     }
@@ -32,7 +34,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -41,6 +43,8 @@ class CategoryController extends Controller
             'name' => $validated['name'],
             'created_by' => Auth::id(),
         ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -62,9 +66,14 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+        $request->user()->createdCategories()->update($validated);
+
+        return redirect()->route('categories.index');
     }
 
     /**
