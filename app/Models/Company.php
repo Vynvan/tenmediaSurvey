@@ -20,6 +20,7 @@ class Company extends Model
         'name',
         'website',
         'created_by',
+        'logo',
     ];
 
     public function jobOffers(): HasMany
