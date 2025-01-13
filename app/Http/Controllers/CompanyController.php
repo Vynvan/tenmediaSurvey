@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,7 +17,7 @@ class CompanyController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Company/Index', [
+        return Inertia::render('Companies/Index', [
             'companies' => Company::with('createdBy:id,name')->get(),
         ]);
     }
@@ -32,21 +33,21 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCompanyRequest $request)
+    public function store(StoreCompanyRequest $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'logo' => ['required', 'image'],
+            'logo' => ['required', 'string'],
             'website' => ['required', 'url', 'max:255'],
         ]);
         $request->user()->createdCompanies()->create([
             'name' => $validated['name'],
-            'email' => $validated['email'],
             'logo' => $validated['logo'],
             'website' => $validated['website'],
             'created_by' => Auth::id(),
         ]);
+
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -70,7 +71,14 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'logo' => ['string', 'max:255'],
+            'website' => ['required', 'url', 'max:255'],
+        ]);
+        $request->user()->createdCompanies()->create($validated);
+
+        return redirect()->route('companies.index');
     }
 
     /**

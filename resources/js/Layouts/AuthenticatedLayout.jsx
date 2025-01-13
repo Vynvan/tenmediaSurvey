@@ -33,6 +33,11 @@ export default function AuthenticatedLayout({ header, children }) {
                                     active={route().current('categories.index')}>
                                     Categories
                                 </NavLink>
+                                <NavLink
+                                    href={route('companies.index')}
+                                    active={route().current('companies.index')}>
+                                    Companies
+                                </NavLink>
                             </div>
                         </div>
 

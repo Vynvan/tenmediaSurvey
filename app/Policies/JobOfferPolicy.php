@@ -13,7 +13,7 @@ class JobOfferPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class JobOfferPolicy
      */
     public function view(User $user, JobOffer $job): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class JobOfferPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user !== null;
     }
 
     /**
@@ -37,7 +37,7 @@ class JobOfferPolicy
      */
     public function update(User $user, JobOffer $job): bool
     {
-        return false;
+        return $user !== null && $user->id === $job->created_by;
     }
 
     /**
@@ -61,6 +61,6 @@ class JobOfferPolicy
      */
     public function forceDelete(User $user, JobOffer $job): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 }
