@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     public function index(): Response
     {
         return Inertia::render('Category/Index', [
-            'categories' => Category::all(),
+            'categories' => Category::with('createdBy:id,name')->get(),
         ]);
     }
 
@@ -36,7 +37,10 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
         ]);
-        $request->user()->createdCategories()->create($validated);
+        $request->user()->createdCategories()->create([
+            'name' => $validated['name'],
+            'created_by' => Auth::id(),
+        ]);
     }
 
     /**
@@ -44,7 +48,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('category.show', compact('category'));
     }
 
     /**

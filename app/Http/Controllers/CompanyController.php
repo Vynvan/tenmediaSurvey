@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -16,7 +17,7 @@ class CompanyController extends Controller
     public function index(): Response
     {
         return Inertia::render('Company/Index', [
-            'companies' => Company::all(),
+            'companies' => Company::with('createdBy:id,name')->get(),
         ]);
     }
 
@@ -39,7 +40,13 @@ class CompanyController extends Controller
             'logo' => ['required', 'image'],
             'website' => ['required', 'url', 'max:255'],
         ]);
-        $request->user()->createdCompanies()->create($validated);
+        $request->user()->createdCompanies()->create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'logo' => $validated['logo'],
+            'website' => $validated['website'],
+            'created_by' => Auth::id(),
+        ]);
     }
 
     /**
@@ -47,7 +54,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return view('company.show', compact('company'));
     }
 
     /**

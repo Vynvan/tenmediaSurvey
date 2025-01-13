@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobOffer;
 use App\Http\Requests\StoreJobOfferRequest;
 use App\Http\Requests\UpdateJobOfferRequest;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -16,7 +17,7 @@ class JobOfferController extends Controller
     public function index(): Response
     {
         return Inertia::render('JobOffer/Index', [
-            'jobOffers' => JobOffer::all(),
+            'jobOffers' => JobOffer::with('createdBy:id,name')->get(),
         ]);
     }
 
@@ -42,7 +43,16 @@ class JobOfferController extends Controller
             'type' => ['required', 'string', 'max:255'],
             'status' => ['required', 'string', 'max:255'],
         ]);
-        $request->user()->createdJobOffers()->create($validated);
+        $request->user()->createdJobOffers()->create([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'category_id' => $validated['category_id'],
+            'company_id' => $validated['company_id'],
+            'location' => $validated['location'],
+            'type' => $validated['type'],
+            'status' => $validated['status'],
+            'created_by' => Auth::id(),
+        ]);
     }
 
     /**
@@ -50,7 +60,7 @@ class JobOfferController extends Controller
      */
     public function show(JobOffer $job)
     {
-        //
+        return view('job.show', compact('job'));
     }
 
     /**
