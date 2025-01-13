@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\JobOfferController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,16 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/categories', function () {
-    return Inertia::render('Categories/Index');
-})->middleware(['auth', 'verified'])->name('categories.index');
+Route::resource('categories', CategoryController::class)
+    ->only(['index', 'store', 'update'])
+    ->middleware(['auth', 'verified']);
 
-Route::get('/companies', function () {
-    return Inertia::render('Companies/Index');
-})->middleware(['auth', 'verified'])->name('companies.index');
+Route::resource('companies', CompanyController::class)
+    ->only(['index', 'store', 'update'])
+    ->middleware(['auth', 'verified']);
 
-Route::get('/job-offers', function () {
-    return Inertia::render('JobOffers/Index');
-})->middleware(['auth', 'verified'])->name('job-offers.index');
+Route::resource('jobOffers', JobOfferController::class)
+    ->only(['index', 'store', 'update'])
+    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
