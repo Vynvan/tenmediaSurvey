@@ -29,6 +29,6 @@ Aus der Abbildung ergeben sich die Modelle und deren Relationen, sowie folgende 
 
 - Anmeldung/Registrierung
 
-Da aus der Aufgabenstellung nicht hervorgeht, ob die Benutzer Jobs anlegen oder folgen können, lasse ich das erstmal weg, 
-aber bei Szenario 1 (Benutzer können Jobs und evtl. auch Companies anlegen) würde dies eine weitere Relation "Job/Company -> Ersteller" erfordern, 
-während Szenario 2 (Benutzer können Jobs folgen/abonnieren) würde dies eine HasMany-Relation "Benutzer -> Jobs" erfordern.
+Da aus der Aufgabenstellung nicht hervorgeht, ob die Benutzer Jobs anlegen oder folgen können/sollen, stelle ich mir zwei sinnvolle Szenarios vor, die einander nicht ausschließen: 
+Szenario 1: Benutzer können Jobs und evtl. auch Companies anlegen, dies wird weitere 1-n-Relationen "Ersteller -> Jobs/Companies" erfordern;
+Szenario 2: Benutzer können Jobs folgen/abonnieren, dies wird eine HasMany-Relation "Benutzer -> Jobs" über eine Pivot-Tabelle erfordern;
