@@ -39,7 +39,7 @@ class JobOffer extends Model
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function users(): BelongsToMany
