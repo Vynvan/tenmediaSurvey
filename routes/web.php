@@ -24,8 +24,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/categories', function () {
+    return Inertia::render('Categories/Index');
+})->middleware(['auth', 'verified'])->name('categories.index');
+
 Route::get('/companies', function () {
     return Inertia::render('Companies/Index');
 })->middleware(['auth', 'verified'])->name('companies.index');
+
+Route::get('/job-offers', function () {
+    return Inertia::render('JobOffers/Index');
+})->middleware(['auth', 'verified'])->name('job-offers.index');
 
 require __DIR__.'/auth.php';

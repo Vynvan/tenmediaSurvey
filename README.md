@@ -2,7 +2,7 @@
 
 ## Aufgabe 1: Konzept
 
-![Abbildung ERM](tenmedia_survey_a1.drawio.png)
+![Abbildung ERM](tenmedia_survey_a1.png)
 
 Aus der Abbildung ergeben sich die Modelle und deren Relationen, sowie folgende notwendige Seiten:
 - Startseite
@@ -30,5 +30,5 @@ Aus der Abbildung ergeben sich die Modelle und deren Relationen, sowie folgende 
 - Anmeldung/Registrierung
 
 Da aus der Aufgabenstellung nicht hervorgeht, ob die Benutzer Jobs anlegen oder folgen können/sollen, stelle ich mir zwei sinnvolle Szenarios vor, die einander nicht ausschließen: 
-Szenario 1: Benutzer können Jobs und evtl. auch Companies anlegen, dies wird weitere 1-n-Relationen "Ersteller -> Jobs/Companies" erfordern;
-Szenario 2: Benutzer können Jobs folgen/abonnieren, dies wird eine HasMany-Relation "Benutzer -> Jobs" über eine Pivot-Tabelle erfordern;
+Szenario 1: Benutzer können Jobs/Companies/Categories anlegen, dies wird weitere 1-n-Relationen "Ersteller -> Jobs/Companies/Categories" erfordern;
+Szenario 2: Benutzer können Jobs folgen/abonnieren, dies wird eine n-m-Relation "Benutzer -> Jobs" über eine Pivot-Tabelle erfordern;
