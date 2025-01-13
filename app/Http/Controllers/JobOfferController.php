@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\JobOffer;
 use App\Http\Requests\StoreJobOfferRequest;
 use App\Http\Requests\UpdateJobOfferRequest;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class JobOfferController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        return Inertia::render('JobOffer/Index', [
+            'jobOffers' => JobOffer::all(),
+        ]);
     }
 
     /**
@@ -29,7 +33,16 @@ class JobOfferController extends Controller
      */
     public function store(StoreJobOfferRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'company_id' => ['required', 'exists:companies,id'],
+            'location' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'max:255'],
+            'status' => ['required', 'string', 'max:255'],
+        ]);
+        $request->user()->createdJobOffers()->create($validated);
     }
 
     /**

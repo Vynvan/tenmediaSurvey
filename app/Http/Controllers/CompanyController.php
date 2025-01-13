@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        return Inertia::render('Company/Index', [
+            'companies' => Company::all(),
+        ]);
     }
 
     /**
@@ -29,7 +33,13 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'logo' => ['required', 'image'],
+            'website' => ['required', 'url', 'max:255'],
+        ]);
+        $request->user()->createdCompanies()->create($validated);
     }
 
     /**
