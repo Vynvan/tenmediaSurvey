@@ -37,14 +37,14 @@ class CompanyController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'logo' => ['required', 'string'],
+            'logo' => ['nullable', 'string', 'max:255'],
             'website' => ['required', 'url', 'max:255'],
         ]);
         $request->user()->createdCompanies()->create([
             'name' => $validated['name'],
             'logo' => $validated['logo'],
             'website' => $validated['website'],
-            'created_by' => Auth::id(),
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('companies.index');
@@ -73,7 +73,7 @@ class CompanyController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'logo' => ['string', 'max:255'],
+            'logo' => ['nullable', 'string', 'max:255'],
             'website' => ['required', 'url', 'max:255'],
         ]);
         $request->user()->createdCompanies()->create($validated);

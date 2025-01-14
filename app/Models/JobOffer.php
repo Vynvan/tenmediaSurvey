@@ -22,7 +22,6 @@ class JobOffer extends Model
         'description',
         'location',
         'salary',
-        'created_by',
         'category_id',
         'company_id',
     ];
@@ -39,7 +38,7 @@ class JobOffer extends Model
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function users(): BelongsToMany

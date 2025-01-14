@@ -19,7 +19,6 @@ class Category extends Model
      */
     protected $fillable = [
         'name',
-        'created_by',
     ];
 
     public function jobOffers(): HasMany
@@ -29,7 +28,7 @@ class Category extends Model
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

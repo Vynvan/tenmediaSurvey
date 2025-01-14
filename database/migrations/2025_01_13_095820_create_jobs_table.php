@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('salary', 8, 2);
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
-            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('website');
-            $table->string('logo');
-            $table->foreignId('created_by')->constrained('users');
+            $table->string('logo')->nullable();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

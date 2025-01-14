@@ -41,7 +41,7 @@ class CategoryController extends Controller
         ]);
         $request->user()->createdCategories()->create([
             'name' => $validated['name'],
-            'created_by' => Auth::id(),
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('categories.index');

@@ -24,7 +24,7 @@ class UpdateCompanyRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', 'unique:categories'],
             'website' => ['required', 'string', 'max:255'],
-            'logo' => ['string', 'max:255'],
+            'logo' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

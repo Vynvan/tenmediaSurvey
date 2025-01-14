@@ -20,13 +20,12 @@ class Company extends Model
     protected $fillable = [
         'name',
         'website',
-        'created_by',
         'logo',
     ];
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function jobOffers(): HasMany
