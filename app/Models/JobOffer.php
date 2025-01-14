@@ -26,6 +26,8 @@ class JobOffer extends Model
         'company_id',
     ];
 
+    protected $table = 'jobOffers';
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

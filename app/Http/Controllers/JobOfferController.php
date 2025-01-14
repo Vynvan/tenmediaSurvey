@@ -16,8 +16,12 @@ class JobOfferController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('JobOffer/Index', [
-            'jobOffers' => JobOffer::with('createdBy:id,name')->get(),
+        return Inertia::render('JobOffers/Index', [
+            'jobOffers' => JobOffer::with([
+                'category:id,name',
+                'company:id,name',
+                'createdBy:id,name',
+            ])->get(),
         ]);
     }
 
@@ -37,22 +41,22 @@ class JobOfferController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
+            'location' => ['required', 'string', 'max:255'],
+            'salary' => ['required', 'numeric'],
             'category_id' => ['required', 'exists:categories,id'],
             'company_id' => ['required', 'exists:companies,id'],
-            'location' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'string', 'max:255'],
-            'status' => ['required', 'string', 'max:255'],
         ]);
         $request->user()->createdJobOffers()->create([
             'title' => $validated['title'],
             'description' => $validated['description'],
+            'location' => $validated['location'],
+            'salary' => $validated['salary'],
             'category_id' => $validated['category_id'],
             'company_id' => $validated['company_id'],
-            'location' => $validated['location'],
-            'type' => $validated['type'],
-            'status' => $validated['status'],
-            'created_by' => Auth::id(),
+            'user_id' => Auth::id(),
         ]);
+
+        return redirect()->route('jobOffers.index');
     }
 
     /**
@@ -76,7 +80,17 @@ class JobOfferController extends Controller
      */
     public function update(UpdateJobOfferRequest $request, JobOffer $job)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'location' => ['required', 'string', 'max:255'],
+            'salary' => ['required', 'numeric'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'company_id' => ['required', 'exists:companies,id'],
+        ]);
+        $request->user()->createdJobOffers()->update($validated);
+
+        return redirect()->route('job-offers.index');
     }
 
     /**

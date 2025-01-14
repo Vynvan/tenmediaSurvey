@@ -38,6 +38,11 @@ export default function AuthenticatedLayout({ header, children }) {
                                     active={route().current('companies.index')}>
                                     Companies
                                 </NavLink>
+                                <NavLink
+                                    href={route('jobOffers.index')}
+                                    active={route().current('jobOffers.index')}>
+                                    Jobs
+                                </NavLink>
                             </div>
                         </div>
 
@@ -127,6 +132,16 @@ export default function AuthenticatedLayout({ header, children }) {
                             href={route('categories.index')}
                             active={route().current('categories.index')}>
                             Categories
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('companies.index')}
+                            active={route().current('companies.index')}>
+                            Companies
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('jobOffers.index')}
+                            active={route().current('jobOffers.index')}>
+                            Jobs
                         </ResponsiveNavLink>
                     </div>
 

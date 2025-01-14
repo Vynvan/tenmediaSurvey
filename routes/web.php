@@ -17,6 +17,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/api/categories', [CategoryController::class, 'apiIndex'])
+    ->name('api.categories.index');
+
+Route::get('/api/companies', [CompanyController::class, 'apiIndex'])
+    ->name('api.companies.index');
+    
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

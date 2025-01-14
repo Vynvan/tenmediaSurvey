@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -22,6 +23,14 @@ class CompanyController extends Controller
         ]);
     }
 
+    public function apiIndex(Request $request)
+    {
+        $search = $request->query('search', '');
+        $companies = Company::where('name', 'like', "%{$search}%")->limit(10)->get();
+    
+        return response()->json($companies);
+    }
+    
     /**
      * Show the form for creating a new resource.
      */

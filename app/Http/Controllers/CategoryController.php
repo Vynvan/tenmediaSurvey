@@ -6,7 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -23,6 +23,14 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function apiIndex(Request $request)
+    {
+        $search = $request->query('search', '');
+        $categories = Category::where('name', 'like', "%{$search}%")->limit(10)->get();
+    
+        return response()->json($categories);
+    }
+    
     /**
      * Show the form for creating a new resource.
      */
