@@ -34,9 +34,11 @@ Szenario 1: Benutzer können Jobs/Companies/Categories anlegen, dies wird weiter
 Szenario 2: Benutzer können Jobs folgen/abonnieren, dies wird eine n-m-Relation "Benutzer -> Jobs" über eine Pivot-Tabelle erfordern;
 
 
+
 ## 2. Installation
 
 Eine saubere Laravel-Installation war bei [Commit 23b6684](https://github.com/Vynvan/tenmediaSurvey/commit/23b6684101cb4221de63b06f6c7634ac630a8c00) erreicht.
+
 
 
 ## 3. Modelle, Controller, Migrations anlegen
@@ -44,9 +46,11 @@ Eine saubere Laravel-Installation war bei [Commit 23b6684](https://github.com/Vy
 Bei [Commit d9d7195](https://github.com/Vynvan/tenmediaSurvey/commit/d9d7195912dae3b19f38a7ce6ef332aa83d752d2) hatte ich die Modelle, Controller und Migrations erstellt und begann mit dem Implementieren von Funktionatlität.
 
 
+
 ## 3. und 4. verschwimmen
 
 Bei [Commit 7d17283](https://github.com/Vynvan/tenmediaSurvey/commit/7d1728323883735ec11e5bd2d17487e777c178e4) habe ich mit dem Implementieren von Frontend-Pages begonnen, habe aber beim Verknüpfen mit dem Backend soviel an den Controllern und Models angepasst, dass es schwierig ist zu bestimmen, wo Aufgabe 3 endet und Aufgabe 4 beginnt.
+
 
 
 ## Fazit:
