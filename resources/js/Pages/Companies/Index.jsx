@@ -29,10 +29,11 @@ export default function Index({ auth, companies }) {
                     <input value={data.name} onChange={e => setData('name', e.target.value)} placeholder='Name' type="text" name="name" id="name" required
                         className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                     />
+                    <InputError message={errors.name} className="mt-2" />
                     <input value={data.website} onChange={e => setData('website', e.target.value)} placeholder='Website' type="text" name="website" id="website" required
                         className="mt-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                     />
-                    <InputError message={errors.message} className="mt-2" />
+                    <InputError message={errors.website} className="mt-2" />
                     <PrimaryButton className="mt-4" disabled={processing}>
                         Save
                     </PrimaryButton>
